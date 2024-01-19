@@ -25,10 +25,11 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
 
     public void dropUsersTable() {
-        String dropCommand = "IF EXIST DROP TABLE users";
+        String dropCommand = "DROP TABLE users";
 
         try (Statement statement = connection.createStatement()) {
             statement.execute(dropCommand);
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,6 +43,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             pstm.setString(2, lastName);
             pstm.setByte(3, age);
             pstm.executeUpdate();
+            connection.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,6 +54,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         try (PreparedStatement pstm = connection.prepareStatement("DELETE FROM users WHERE id = ?")) {
             pstm.setLong(1, id);
             pstm.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,6 +69,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                         resultSet.getString("lastname"), resultSet.getByte("age"));
                 user.setId(resultSet.getLong("id"));
                 users.add(user);
+                connection.commit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,6 +81,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void cleanUsersTable() {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("TRUNCATE TABLE users");
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
