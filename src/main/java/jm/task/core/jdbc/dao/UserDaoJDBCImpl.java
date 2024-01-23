@@ -17,9 +17,15 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         String createCommand = "CREATE TABLE IF NOT EXISTS users (ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), LASTNAME VARCHAR(25), AGE INT)";
 
         try (Statement statement = connection.createStatement()) {
+            connection.setAutoCommit(false);
             statement.execute(createCommand);
+            connection.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -28,10 +34,15 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         String dropCommand = "DROP TABLE users";
 
         try (Statement statement = connection.createStatement()) {
+            connection.setAutoCommit(false);
             statement.execute(dropCommand);
             connection.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
 
