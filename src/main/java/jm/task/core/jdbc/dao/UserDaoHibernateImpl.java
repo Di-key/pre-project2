@@ -5,9 +5,6 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.List;
