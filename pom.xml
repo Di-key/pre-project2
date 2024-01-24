@@ -42,6 +42,11 @@
       <artifactId>hibernate-core</artifactId>
       <version>5.4.22.Final</version>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <version>1.0.2.Final</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
     <dependency>
       <groupId>com.mysql</groupId>
@@ -67,6 +72,14 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.9.6</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations -->
+    <dependency>
+      <groupId>org.hibernate.common</groupId>
+      <artifactId>hibernate-commons-annotations</artifactId>
+      <version>5.1.2.Final</version>
+    </dependency>
+
+
   </dependencies>
 
   <build>
